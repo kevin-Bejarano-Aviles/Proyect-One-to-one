@@ -1,0 +1,33 @@
+version: '3'
+services:
+  db:
+    image: mysql:8
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: asdqwe
+      MYSQL_DATABASE: onetoone
+      MYSQL_USER : pruebadb_kevin
+      MYSQL_PASSWORD: asdqwe
+    volumes:
+      - mysql-data:/var/lib/mysql
+  app:
+    image: node:16
+    links:
+      - db
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    working_dir: /app
+    environment:
+      DB_USER: pruebadb_kevin
+      DB_PASSWORD: asdqwe
+      DB_DATABASE: onetoone
+      PORT: 8000
+    volumes:
+      - .:/app
+    command: sh -c "cd /app && npx nodemon -L src/app.ts"
+volumes:
+  mysql-data:
