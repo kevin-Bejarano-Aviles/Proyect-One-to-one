@@ -7,7 +7,7 @@ export class Actionables {
     @PrimaryColumn({
         type:'uuid'
     })
-    id!:string
+    id!:string      
 
 
     @ManyToOne(()=> FollowUp,(followup_id)=>followup_id.actionable)
@@ -26,7 +26,7 @@ export class Actionables {
 
 
     @Column({
-        type:'date',
+        type:'timestamp',
     })
     due_date?:Date
 
