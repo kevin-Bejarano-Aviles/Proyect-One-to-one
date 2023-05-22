@@ -26,7 +26,7 @@ class MySqlConnection implements iDatabase {
     public start() {
         this.dataSource.initialize()
             .then(() => logger.info('Database connection successfully.'))
-            .catch((error) => logger.error('Database connection error: ' + error))
+            .catch((error: Error) => logger.error('Database connection error: ' + error.message))
     }
 }
 
