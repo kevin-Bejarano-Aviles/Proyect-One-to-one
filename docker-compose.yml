@@ -13,21 +13,21 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
   app:
-    image: node:16
+    image: oneonone
     links:
       - db
     depends_on:
       - db
     ports:
-      - "8000:8000"
+      - "4000:4000"
     working_dir: /app
     environment:
       DB_USER: pruebadb_kevin
       DB_PASSWORD: asdqwe
       DB_DATABASE: onetoone
-      PORT: 8000
+      PORT: 4000
     volumes:
-      - .:/app
+      - ./:/app
     command: sh -c "cd /app && npx nodemon -L src/app.ts"
 volumes:
   mysql-data:
