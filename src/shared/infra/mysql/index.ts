@@ -8,6 +8,8 @@ dotenv.config()
 
 class MySqlConnection implements iDatabase {
     private dataSource: DataSource;
+    private static instance: MySqlConnection;
+
     constructor() {
         this.dataSource = new DataSource({
             type: 'mysql',
@@ -23,6 +25,13 @@ class MySqlConnection implements iDatabase {
         })
     }
 
+    public static getInstance(): MySqlConnection {
+        if (!MySqlConnection.instance) {
+            MySqlConnection.instance = new MySqlConnection();
+        }
+        return MySqlConnection.instance;
+    }
+
     public start() {
         this.dataSource.initialize()
             .then(() => logger.info('Database connection successfully.'))
@@ -30,4 +39,4 @@ class MySqlConnection implements iDatabase {
     }
 }
 
-export default new MySqlConnection();
+export default MySqlConnection.getInstance();
