@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm'
-import { FollowUp } from './FollowUp'
-import { User } from './User'
+import { User, Meeting } from './'
+
 
 @Entity()
 export class Actionables {
@@ -10,8 +10,14 @@ export class Actionables {
     id!:string      
 
 
-    @ManyToOne(()=> FollowUp,(followup_id)=>followup_id.actionable)
-    followup_id!:FollowUp
+    @ManyToOne(()=> Meeting,(followup_id)=>followup_id.actionables,
+        {
+            nullable:false,
+            onDelete:'CASCADE',
+            onUpdate:'CASCADE'
+        }
+    )
+    followup_id!:Meeting
 
 
     @Column({
@@ -20,18 +26,26 @@ export class Actionables {
     })
     task!:string
 
-    @ManyToOne(()=>User,(owner)=>owner.actionable)
+    @ManyToOne(()=>User,(owner)=>owner.actionables,
+        {
+            nullable:false,
+            onDelete:'CASCADE',
+            onUpdate:'CASCADE'
+        }
+    )
     owner!:User
 
 
 
     @Column({
         type:'timestamp',
+        nullable:true
     })
     due_date?:Date
 
     @Column({
-        type:'timestamp'
+        type:'timestamp',
+        nullable:true
     })
     completed_date?:Date    
 }

@@ -10,7 +10,7 @@ import { createActionable } from "../metodos/actionablesMethods";
 
 
 export const createUser = async(req:Request,res:Response)=>{
-    const {name,last_name} = req.body;
+    /* const {name,last_name} = req.body;
     const user =  MysqlDataSource.getRepository(User).create({
         id:uuid(),
         name,
@@ -19,7 +19,7 @@ export const createUser = async(req:Request,res:Response)=>{
     await MysqlDataSource.manager.save(user);
     return res.json({
         user
-    })
+    }) */
 }
 
 
@@ -38,7 +38,7 @@ interface ActionableFieldsApi {
 }
 
 export const newFollowUp = async(req:Request,res:Response) =>{
-    try {
+  /*   try {
         const {
             owner:ownerId,
             attendee:atendeeId,
@@ -77,5 +77,5 @@ export const newFollowUp = async(req:Request,res:Response) =>{
     } catch (error) {
         res.json(error)
         console.log(error);
-    }
+    } */
 }

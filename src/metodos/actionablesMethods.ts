@@ -5,7 +5,7 @@ import { v4 as uuid } from 'uuid';
 
 
 export const createActionable =async(followup:FollowUp,task:string,owner:User,due_date:Date,completed_date:Date)=>{
-    const actionable = MysqlDataSource.manager.create(Actionables,{
+    /* const actionable = MysqlDataSource.manager.create(Actionables,{
         id: uuid(),
         followup_id:followup,
         task,
@@ -15,19 +15,19 @@ export const createActionable =async(followup:FollowUp,task:string,owner:User,du
     })
     await MysqlDataSource.manager.save(actionable);
     return actionable;
-    
+     */
 }
 export const findAllActionable =async()=>{
-    const allActionables = await MysqlDataSource.manager.find(Actionables);
-    return allActionables;
+   /*  const allActionables = await MysqlDataSource.manager.find(Actionables);
+    return allActionables; */
 }
 export const findOneActionable =async(id:string)=>{
-    const actionable = await MysqlDataSource.manager.findOne(Actionables,{
+   /*  const actionable = await MysqlDataSource.manager.findOne(Actionables,{
         where:{
             id
         }
     });
-    return actionable;
+    return actionable; */
 }
 export const updateActionable =async()=>{
 

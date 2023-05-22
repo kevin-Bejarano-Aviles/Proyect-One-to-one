@@ -1,5 +1,6 @@
 import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm';
-import { Actionables } from './Actionables';
+import { Actionables, Meeting } from './';
+
 
 
 @Entity()
@@ -14,17 +15,23 @@ export class User {
     @Column({
         type:'varchar',
         length:255,
-        nullable:true
+        nullable:false
     })
     name!:string
 
     @Column({
         type:'varchar',
         length:255,
-        nullable:true
+        nullable:false
     })
     last_name!:string;
 
-    @OneToMany(()=> Actionables,(actionable)=>actionable.owner)
-    actionable?:Actionables[]
+    @OneToMany( ()=> Meeting,(ownerMetting)=> ownerMetting.owner )
+    ownerMetting?:Meeting[];
+
+    @OneToMany( ()=>Meeting,(attendee)=>attendee.attendee )
+    attendeeMetting?:Meeting[];
+
+    @OneToMany(()=> Actionables,(actionables)=>actionables.owner)
+    actionables?:Actionables[]
 }

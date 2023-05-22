@@ -1,6 +1,5 @@
-import { Entity, PrimaryColumn, Column, OneToOne,JoinColumn, OneToMany} from 'typeorm';
-import { User } from './User';
-import { Actionables } from './Actionables';
+import { Entity, PrimaryColumn, Column, OneToOne,JoinColumn, OneToMany, ManyToOne} from 'typeorm';
+import { Meeting } from './';
 
 @Entity()
 export class FollowUp {
@@ -10,35 +9,25 @@ export class FollowUp {
     })
     id!:string
 
-    @OneToOne( ()=> User ,{
-        onDelete:'CASCADE',
-        onUpdate:'CASCADE',
+    @Column({
+        type:'int',
         nullable:true
     })
-    @JoinColumn()
-    owner!:User
+    temperature?:number;
 
-
-    @OneToOne( ()=>User,{nullable:true,onDelete:'CASCADE',onUpdate:'CASCADE'})
-    @JoinColumn()
-    attendee!:User
 
     @Column({
         type:'timestamp',
-        nullable:true,
+        nullable:false
     })
-    date!:Date
+    fu_date!:Date
 
-    @Column({
-        type:'longtext'
+
+    @ManyToOne(()=>Meeting,(meeting)=>meeting.followUps,{
+        nullable:false,
+        onDelete:'CASCADE',
+        onUpdate:'CASCADE'
     })
-    topics?:string
+    meeting!:Meeting
 
-    @Column({
-        type:'int'
-    })
-    temperature?:number
-
-    @OneToMany(()=> Actionables,(actionable)=>actionable.followup_id)
-    actionable?:Actionables[]
 }

@@ -1,9 +1,7 @@
 import "reflect-metadata";
 import {DataSource} from 'typeorm';
 import dotenv from 'dotenv';
-import { FollowUp } from "../entity/FollowUp";
-import { Actionables } from "../entity/Actionables";
-import { User } from "../entity/User";
+import { Actionables, FollowUp, Meeting, User } from "../entity"
 
 dotenv.config()
 export const MysqlDataSource = new DataSource({
@@ -14,9 +12,9 @@ export const MysqlDataSource = new DataSource({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     logging: true,
-    entities: [FollowUp,Actionables,User],
+    entities: [User,Actionables,Meeting,FollowUp],
     migrations: [],
-    synchronize:true,
+    synchronize:true
     
 
 })
