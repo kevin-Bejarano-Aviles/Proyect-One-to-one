@@ -3,7 +3,7 @@ import { Actionables , Meeting, User } from "../entity";
 import { v4 as uuid } from 'uuid';
 import { ActionableFieldsApi } from "../interfaces/bodyInterfaces";
 
-const dataTypeOrm = mysql.data();
+const dataTypeOrm = mysql.dataMysql();
 
 
 
