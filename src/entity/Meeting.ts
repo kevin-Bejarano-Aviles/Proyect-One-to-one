@@ -6,9 +6,9 @@ import { User, Actionables, FollowUp } from "./";
 export class Meeting {
 
     @PrimaryColumn({
-        type:'uuid'
+        type:'uuid',
     })
-    id!:string
+    id!:string;
 
 
     @ManyToOne(()=>User,(owner)=>owner.ownerMetting,{
@@ -39,7 +39,7 @@ export class Meeting {
     })
     topics?:string;
 
-    @OneToMany(()=> Actionables,(actionable)=>actionable.followup_id)
+    @OneToMany(()=> Actionables,(actionable)=>actionable.meeting_id)
     actionables?:Actionables[];
 
     @OneToMany(()=>FollowUp,(followUp)=>followUp.meeting)

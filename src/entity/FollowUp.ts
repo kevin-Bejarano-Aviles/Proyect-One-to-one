@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, Column, OneToOne,JoinColumn, OneToMany, ManyToOne} from 'typeorm';
+import { Entity, PrimaryColumn, Column, ManyToOne} from 'typeorm';
 import { Meeting } from './';
 
 @Entity()

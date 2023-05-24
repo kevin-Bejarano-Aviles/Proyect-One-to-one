@@ -10,14 +10,14 @@ export class Actionables {
     id!:string      
 
 
-    @ManyToOne(()=> Meeting,(followup_id)=>followup_id.actionables,
+    @ManyToOne(()=> Meeting,(meeting_id)=>meeting_id.actionables,
         {
             nullable:false,
             onDelete:'CASCADE',
             onUpdate:'CASCADE'
         }
     )
-    followup_id!:Meeting
+    meeting_id!:Meeting
 
 
     @Column({
