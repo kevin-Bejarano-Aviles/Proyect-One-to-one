@@ -1,7 +1,8 @@
 import { Router } from "express";
-import followUpRouter from '../routes/followUp'
+import meetingRouter from './meeting.routes'
 const router = Router();
+//TODO cambiar a meeting
 
-router.use('/follow-up', followUpRouter)
+router.use('/meeting', meetingRouter)
 
 export default router;
