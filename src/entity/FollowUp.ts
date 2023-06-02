@@ -18,6 +18,7 @@ export class FollowUp {
 
     @Column({
         type:'timestamp',
+        default: () => 'CURRENT_TIMESTAMP',
         nullable:false
     })
     fu_date!:Date
@@ -28,6 +29,6 @@ export class FollowUp {
         onDelete:'CASCADE',
         onUpdate:'CASCADE'
     })
-    meeting!:Meeting
+    meeting_id!:Meeting
 
 }

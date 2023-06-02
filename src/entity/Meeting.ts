@@ -39,9 +39,16 @@ export class Meeting {
     })
     topics?:string;
 
+
+    @Column({
+        type:'varchar',
+        nullable:true
+    })
+    title?:string
+
     @OneToMany(()=> Actionables,(actionable)=>actionable.meeting_id)
     actionables?:Actionables[];
 
-    @OneToMany(()=>FollowUp,(followUp)=>followUp.meeting)
+    @OneToMany(()=>FollowUp,(followUp)=>followUp.meeting_id)
     followUps?:FollowUp[];
 }
