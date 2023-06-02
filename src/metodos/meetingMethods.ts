@@ -2,15 +2,14 @@ import mysql from "../shared/infra/mysql/index";
 import { Meeting, User } from "../entity"
 import { v4 as uuid } from 'uuid';
 
+const dataTypeOrm = mysql.dataMysql();
 
-const dataTypeOrm = mysql.data();
-
-export const createMetting  = async(owner:User,attendee:User,topics:string) => {
+export const createMetting  = async(owner:User,attendee:User,title:string) => {
     const meeting = dataTypeOrm.manager.create(Meeting,{
         id: uuid(),
         owner,
         attendee,
-        topics
+        title
     });
 
     await dataTypeOrm.manager.save(meeting);
@@ -19,17 +18,20 @@ export const createMetting  = async(owner:User,attendee:User,topics:string) => {
 }
 
 export const findAllMetting  = async() => {
-    const meetings = await dataTypeOrm.manager.find(Meeting,{
-        relations:{
-            owner:true,
-            attendee:true,
+    const meetings = await dataTypeOrm.manager.find(Meeting,
+        {
+            relations:{
+                owner:true,
+                attendee:true,
+            }
         }
-    });
+    );
 
     return meetings;
 }
 
 export const findOneMetting  = async( id:string ) => {
+
     const meeting = await dataTypeOrm.manager.findOne(Meeting,{
         where:{
             id
@@ -37,19 +39,22 @@ export const findOneMetting  = async( id:string ) => {
         relations:{
             owner:true,
             attendee:true,
+            actionables:{
+                owner:true
+            }
         }
     })
 
     return meeting;
 }
 
-export const updateMetting  = async(id:string,topics:string) => {
-//modificar el topics, quitar o añadir los accionables
+export const updateMetting  = async(id:string,topics?:string,title?:string) => {
     await dataTypeOrm.manager.update(Meeting,id,{
         topics,
-    })
+        title
+    });
 }
-// crear un metodo en api controller que solo ver los actionables de una meeting y actualizar o eliminar los actionables de que esten ligadas a esa meeting
+
 export const deleteMetting  = async(id:string) => {
     await dataTypeOrm.manager.delete(Meeting,id);
 }

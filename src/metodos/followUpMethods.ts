@@ -3,14 +3,13 @@ import { FollowUp, Meeting } from "../entity";
 import { v4 as uuid } from 'uuid';
 
 
-const dataTypeOrm = mysql.data();
+const dataTypeOrm = mysql.dataMysql();
 
-export const createFollowUp =async(temperature:number,fu_date:Date,meeting:Meeting)=>{
+export const createFollowUp =async(temperature:number,meeting:Meeting)=>{
     const followUp = dataTypeOrm.manager.create(FollowUp,{
         id:uuid(),
         temperature,
-        fu_date:new Date(fu_date),
-        meeting
+        meeting_id:meeting
     });
 
     await dataTypeOrm.manager.save(followUp);
@@ -20,7 +19,7 @@ export const createFollowUp =async(temperature:number,fu_date:Date,meeting:Meeti
 export const findAllFollowUp =async()=>{
     const allFollowUp = await dataTypeOrm.manager.find(FollowUp,{
         relations:{
-            meeting:true
+            meeting_id:true
         }
     });
     return allFollowUp;
@@ -31,13 +30,15 @@ export const findOneFollowUp =async(id:string)=>{
             id
         },
         relations:{
-            meeting:true
+            meeting_id:true
         }
     });
     return followUp;
 }
-export const updateFollowUp =async()=>{
-//modificar el topics, quitar o añadir los accionables
+export const updateFollowUp =async(id:string,temperature:number)=>{
+    await dataTypeOrm.manager.update(FollowUp,id,{
+        temperature
+    });
 }
 export const deleteFollowUp = async(id:string)=>{
     await  dataTypeOrm.manager.delete(FollowUp,id);

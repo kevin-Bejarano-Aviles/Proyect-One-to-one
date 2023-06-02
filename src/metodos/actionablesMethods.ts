@@ -1,20 +1,20 @@
 import mysql from "../shared/infra/mysql/index";
 import { Actionables , Meeting, User } from "../entity";
 import { v4 as uuid } from 'uuid';
-import { ActionableFieldsApi } from "../interfaces/bodyInterfaces";
+// import { FindManyOptions } from "typeorm";
 
 const dataTypeOrm = mysql.dataMysql();
 
 
 
-export const createActionable =async(meeting_id:Meeting,task:string,owner:User,due_date:Date,completed_date:Date)=>{
+export const createActionable =async(meeting_id:Meeting,task:string,owner:User,due_date:Date)=>{
     const actionable = dataTypeOrm.manager.create(Actionables,{
         id:uuid(),
         meeting_id,
         task,
         owner,
         due_date:new Date(due_date),
-        completed_date: new Date(completed_date)
+        // completed_date: new Date(completed_date)
     });
 
     await dataTypeOrm.manager.save(actionable);
@@ -23,29 +23,6 @@ export const createActionable =async(meeting_id:Meeting,task:string,owner:User,d
 
 }
 
-export const createManyActionables = async(owner:User,followUp:Meeting,actionablesRequest:ActionableFieldsApi[]) =>{
-    const actionables:Actionables[] = [];
-    
-    for (const iterator of actionablesRequest) {
-        const actionable = new Actionables();
-            actionable.id = uuid();
-            actionable.meeting_id = followUp;
-            actionable.task = iterator.task;
-            actionable.owner = owner;
-            actionable.due_date = new Date(iterator.due_date) ;
-            actionable.completed_date = new Date(iterator.completed_date);
-
-        actionables.push(actionable);
-    }
-    const manyActionables = await dataTypeOrm.createQueryBuilder()
-        .insert()
-        .into(Actionables)
-        .values(actionables)
-        .execute();
-
-
-    return manyActionables;
-}
 export const findAllActionable =async(meetingId:string)=>{
    const actionables = await dataTypeOrm.manager.find(Actionables,{
     where:{
@@ -53,10 +30,18 @@ export const findAllActionable =async(meetingId:string)=>{
              id:meetingId
         }
     },
+    loadRelationIds:{
+        relations:['owner'],
+        disableMixedMap:true
+    },
     relations:{
-        owner:true,
+        owner:true,  
         meeting_id:true
-    }
+    },
+    // relations:{
+    //     owner:cosa
+    //     /* meeting_id:true */
+    // }
    });
 
    return actionables;
@@ -67,6 +52,10 @@ export const findOneActionable =async(id:string)=>{
         where:{
             id
         },
+        /* loadRelationIds:{
+            relations:['owner'],
+            disableMixedMap:true
+        }, */
         relations:{
             owner:true,
             meeting_id:true
@@ -74,7 +63,12 @@ export const findOneActionable =async(id:string)=>{
    });
    return actionable;
 }
-export const updateActionable =async()=>{
+export const updateActionable =async(id:string,task?:string,due_date?:Date,completed_date?:Date)=>{
+    await dataTypeOrm.manager.update(Actionables,id,{
+        task,
+        due_date,
+        completed_date
+    });
 
 }
 export const deleteActionable = async(id:string)=>{

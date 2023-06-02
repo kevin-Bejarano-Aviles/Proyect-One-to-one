@@ -3,7 +3,7 @@ import mysql from "../shared/infra/mysql/index";
 import { User } from "../entity/User";
 import { v4 as uuid } from 'uuid';
 
-const dataTypeOrm =  mysql.data();
+const dataTypeOrm =  mysql.dataMysql();
 
 export const createUser =async(name:string,last_name:string)=>{
     const user = dataTypeOrm.manager.create(User,{
@@ -26,7 +26,7 @@ export const findOneUser =async(id:string)=>{
     });
     return user;
 }
-export const updateUser =async(id:string,name:string,last_name:string)=>{
+export const updateUser =async(id:string,name?:string,last_name?:string)=>{
     await dataTypeOrm.manager.update(User,id,{name:name,last_name:last_name});
 }
 export const deleteUser = async(id:string)=>{
