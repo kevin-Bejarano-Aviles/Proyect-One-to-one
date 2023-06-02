@@ -1,20 +1,23 @@
-export interface NewFollowUpApiBody {
+export interface MeetingDTO {
     owner: string;
-    atendee: string;
-    topics:string;
-    followUp:FollowUpFieldsApi
-    actionables:ActionableFieldsApi[]
+    attendee: string;
+    title: string;
+    
+}
+export interface FollowUpDTO {
+    temperature:number;
+    meeting_id:string;
+    topic:string;
 }
 
-
-export interface ActionableFieldsApi {
-    task:string;
+export interface ActionableDTO {
+    meeting_id: string;
+    task: string;
     owner: string;
     due_date: Date;
-    completed_date:Date;
 }
 
-export interface FollowUpFieldsApi{
-    temperature:number;
-    fu_date:Date
+export interface UserDTO {
+    name:string;
+    last_name:string;
 }
