@@ -6,8 +6,10 @@
 
 Note: Make sure you have installed Make
 
-1. Run ```make build```
-2. Run ```make up```
+1. Run ```cp .envfile .env```
+2. Fill that .env file with proper environment variables.
+3. Run ```make build```
+4. Run ```make up```
 
 If you want to detach the console, just run ```make up-d``` instead of ```make build```
 
