@@ -1,11 +1,11 @@
 export const logger = {
-    error(message: string) { 
+    error(message: any) { 
         console.error(message)
     },
-    info(message: string) {
+    info(message: any) {
         console.info(message)
     },
-    log(message: string) {
+    log(message: any) {
         console.log(message)
     }
 }
