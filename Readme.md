@@ -26,3 +26,7 @@ Run ```make down-v```
 
 1. Open the browser
 2. Go to http://localhost:4000/api/follow-up
+
+#### TODOs:
+- Apply Eslint/Prittier
+

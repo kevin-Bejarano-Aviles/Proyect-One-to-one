@@ -25,9 +25,10 @@ class MySqlConnection implements iDatabase {
         })
     }
 
-    public dataMysql (){
+    public dataMysql() {
         return this.dataSource;
     }
+    
     public static getInstance(): MySqlConnection {
         if (!MySqlConnection.instance) {
             MySqlConnection.instance = new MySqlConnection();

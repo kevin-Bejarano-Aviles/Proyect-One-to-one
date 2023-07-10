@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { logger } from '../shared/infra/logger';
-import { UserDTO } from '../interfaces/bodyInterfaces';
-import { createUser } from '../metodos/userMethods';
+import { logger } from '../../shared/infra/logger';
+import { UserDTO } from '../../interfaces/bodyInterfaces';
+import { createUser } from '../../metodos/userMethods';
 
 
 export const newUser = async(req:Request,res:Response) => {

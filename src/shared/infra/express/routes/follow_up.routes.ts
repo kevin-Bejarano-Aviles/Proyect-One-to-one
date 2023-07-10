@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { newFollowUp } from '../../../../controllers/follow-up.controller';
+import { newFollowUp } from '../../../../infrastructure/controllers/follow-up.controller';
 
 const followUpRouter = Router();
 

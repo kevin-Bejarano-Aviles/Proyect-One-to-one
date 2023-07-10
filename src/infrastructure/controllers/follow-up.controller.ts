@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { logger } from '../shared/infra/logger';
-import { FollowUpDTO } from '../interfaces/bodyInterfaces';
-import { findOneMetting, updateMetting } from '../metodos/meetingMethods';
-import { createFollowUp } from '../metodos/followUpMethods';
+import { logger } from '../../shared/infra/logger';
+import { FollowUpDTO } from '../../interfaces/bodyInterfaces';
+import { findOneMetting, updateMetting } from '../../metodos/meetingMethods';
+import { createFollowUp } from '../../metodos/followUpMethods';
 
 
 export const newFollowUp = async(req:Request,res:Response) => {

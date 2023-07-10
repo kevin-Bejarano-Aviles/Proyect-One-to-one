@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { logger } from '../shared/infra/logger';
-import { ActionableDTO } from '../interfaces/bodyInterfaces';
-import { createActionable, findAllActionable } from '../metodos/actionablesMethods';
-import { findOneMetting } from '../metodos/meetingMethods';
-import { findOneUser } from '../metodos/userMethods';
+import { logger } from '../../shared/infra/logger';
+import { ActionableDTO } from '../../interfaces/bodyInterfaces';
+import { createActionable, findAllActionable } from '../../metodos/actionablesMethods';
+import { findOneMetting } from '../../metodos/meetingMethods';
+import { findOneUser } from '../../metodos/userMethods';
 
 
 export const newActionable = async(req:Request,res:Response) => {

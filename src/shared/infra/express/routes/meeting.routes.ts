@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { allMeetings, newMeeting, oneMeeting } from '../../../../controllers/meeting.controller';
+import { findAll, create, findOne } from '../../../../infrastructure/controllers/meeting.controller';
 
 const meetingRouter = Router();
 
-meetingRouter.post('/',newMeeting);
-meetingRouter.get('/', allMeetings);
-meetingRouter.get('/:id',oneMeeting);
+meetingRouter.post('/', create);
+meetingRouter.get('/', findAll);
+meetingRouter.get('/:id', findOne);
 
 
 export default meetingRouter;
